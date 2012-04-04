@@ -8,9 +8,11 @@ import urllib.parse
 import json 
 import asyncore
 import socket
+import os.path
 from threading import Thread
+from datetime import datetime
 #static information
-CUBE_NUMBER = 1
+CUBE_NUMBER = 0
 
 
 class EventListener(Thread):
@@ -28,6 +30,8 @@ class EventListener(Thread):
             self._connected = True
             while(self._dont_stop):
                 self._read()
+                pass
+            print("no more event-reading to do!")
             pass
         except Exception as ex:
             print("the socket connection failed 'cause of : ",ex)
@@ -47,6 +51,9 @@ class EventListener(Thread):
         #         pass
         #     pass
         print("we received something: ", repr(event_bytes))
+        pass
+    def stopASAP(self):
+        self._dont_stop = False
         pass
     pass
 pass
@@ -137,6 +144,30 @@ while True:
     printResponse(resp, content)
     pass
 
+print()
+print("let's try to display a picture on the cube")
+print("current time is: " + datetime.time(datetime.now()).strftime("%Y-%m-%d %H:%M:%S"))
+filepath = "./SiftDriverV1.png"
+
+if not os.path.isfile(filepath):
+    print("this picture is not available! ->"+filepath)
+    print("we need to skip this test then... ")
+    pass
+else:
+    print("let's load the picture -> "+filepath)
+    filecontent = None
+    with open(filepath, 'rb') as f:
+        filecontent = f.read()
+        pass
+    content_type = 'application/octet-stream'
+    h = httplib2.Http(".cache")
+    
+    resp, content = h.request(baseURI+'/'+appUUID+'/device_methods/'+deviceId+'/show_picture/', "PUT", filecontent)
+    printResponse(resp,content)
+    pass
+
+sys.stdin.readline()
+
 print("about to make some event testing")
 h = httplib2.Http(".cache")
 resp, content = h.request(baseURI+'/'+appUUID+'/device_methods/'+deviceId+'/subscribe', "PUT")
@@ -151,11 +182,14 @@ listener = EventListener("localhost", port)
 listener.start()
 
 
+
+
 sys.stdin.readline()
 print()
 h = httplib2.Http(".cache")
 #deviceId = 'myUniqueIdThatIsNotARealOneYet'
 print("removing the reservation on the device: ", deviceId)
+listener.stopASAP()
 #print("json_params : ", json_params)
 resp, content = h.request(baseURI+'/'+appUUID+'/device/reservation/'+deviceId, "DELETE")
 printResponse(resp,content)
