@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<component xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.rustle.no-ip.info/satin/eclipse/schema/SatinComponentSchema.xsd">
+	
+	<!--Url to the icon that represent the component in the editor -->
+	<icon>http://a1.twimg.com/profile_images/1523921238/icon_reasonably_small.gif</icon>
+	
+	<!--Unique identifier for the component -->
+	<name>TangibleColorDisplay</name>
+	
+	<!--Description of the component -->
+	<info><![CDATA[A tangible component that select whatever tangible device available and show the selected Color on it]]></info>
+	
+	<!--Configuration parameters -->
+	<config>
+	</config>
+	
+	<!--Required interface: a number of push or pull ports -->
+	<requires>
+	</requires>
+	
+	<!--Provided interface: a number of push or pull ports -->
+	<provides>
+		<port argtype="String" kind="Push" name="color"/>
+	</provides>
+	
+	<apis>
+		<![CDATA[
+			<script type="text/javascript" src="http://localhost:9998/resources/tangibleLibLoader.js">
+			</script>
+		]]>
+	</apis>
+	
+	<!-- The function with component code, may be omitted -->
+	<code_ext>TangibleColorDisplay.extern.js</code_ext>
+</component>

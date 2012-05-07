@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<component xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.rustle.no-ip.info/satin/eclipse/schema/SatinComponentSchema.xsd">
+	
+	<!--Url to the icon that represent the component in the editor -->
+	<icon>http://www8.cs.umu.se/~bopspe/SATIN2/editor/icons/SM002-1.1.png</icon>
+	
+	<!--Unique identifier for the component -->
+	<name>TangibleColorGauge</name>
+	
+	<!--Description of the component -->
+	<info><![CDATA[Use one device to represent a given measurement with a color.]]></info>
+	
+	<!--Configuration parameters -->
+	<config>
+		<param name="min_level" type="Int"/>
+		<param name="max_level" type="Int"/>
+		<param name="min_color" type="String"/>
+		<param name="max_color" type="String"/>
+	</config>
+	
+	<!--Required interface: a number of push or pull ports -->
+	<requires>
+	</requires>
+	
+	<!--Provided interface: a number of push or pull ports -->
+	<provides>
+		<port argtype="Int" kind="Push" name="measurement"/>
+	</provides>
+	
+	<apis>
+		<![CDATA[
+			<script type="text/javascript" src="http://localhost:9998/resources/tangibleLibLoader.js">
+			</script>
+		]]>
+	</apis>
+	
+	<!-- The function with component code, may be omitted -->
+	<code_ext>TangibleColorGauge.extern.js</code_ext>
+</component>

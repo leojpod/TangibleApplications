@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<component xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.rustle.no-ip.info/satin/eclipse/schema/SatinComponentSchema.xsd">
+	
+	<!--Url to the icon that represent the component in the editor -->
+	<icon>http://www8.cs.umu.se/~bopspe/SATIN2/editor/icons/SM002-1.1.png</icon>
+	
+	<!--Unique identifier for the component -->
+	<name>TangibleAPI</name>
+	
+	<!--Description of the component -->
+	<info><![CDATA[A background component to work with the TangibleAPI. It offers pulls request for the other Tangible components.]]></info>
+	
+	<!--Configuration parameters -->
+	<config>
+		<param default="TangibleComponents" name="appName" type="String"/>
+		<param default="A tangible application that provides access to the API for SATIN editor" name="description" type="String"/>
+	</config>
+	
+	<!--Required interface: a number of push or pull ports -->
+	<requires>
+	</requires>
+	
+	<!--Provided interface: a number of push or pull ports -->
+	<provides>
+		<port kind="Pull" name="api_access" resulttype="Object"/>
+		<port kind="Pull" name="get_reserved_device" resulttype="[String]"/>
+		<port kind="Pull" name="reserve_new_device_sync" resulttype="String"/>
+		<port kind="Push" name="reserve_new_device"/>
+	</provides>
+	
+	<!-- The function with component code, may be omitted -->
+	<code_ext>TangibleAPI.extern.js</code_ext>
+</component>
