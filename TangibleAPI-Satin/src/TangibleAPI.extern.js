@@ -16,7 +16,7 @@ function make_TangibleAPI(appName, description, id, env) {
 			}
 			return IdList;
 		},
-		reserve_new_device_sync : function() {
+		reserve_new_device_sync : function () {
 			var devId;
 			tAPI.requestAnyDevice(
 				function (data) {
@@ -24,7 +24,9 @@ function make_TangibleAPI(appName, description, id, env) {
 				},
 				function (data) {
 					console.log('a reservation failed: ' + data.msg);
-				}, false);
+				}, 
+				false
+				);
 			return devId;
 		},
 		reserve_new_device : function (onReserved) {

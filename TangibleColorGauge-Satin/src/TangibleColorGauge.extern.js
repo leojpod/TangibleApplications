@@ -1,3 +1,6 @@
+/*jslint devel: true,  */
+/*global TangibleAPI: false */
+
 var beforeunloadHandlers = [];
 function addUnloadHandler(h) {
 	"use strict";
@@ -9,6 +12,8 @@ function make_TangibleColorGauge(min_level, max_level, min_color, max_color, id,
 	var tAPI = new TangibleAPI(),
 		devId = null,
 		bColor,
+		mColor,
+		med_level,
 		eColor;
 	//  var exitOver = false;
 	function assertColor(supposedColor, defaultColor) {
@@ -24,9 +29,25 @@ function make_TangibleColorGauge(min_level, max_level, min_color, max_color, id,
 		return rgb;
 	}
 	function convertToHex(rgbColor) {
-		var rgb = rgbColor.b | (rgbColor.g << 8) | (rgbColor.r << 16);
+		var rgb = rgbColor.b + (rgbColor.g * Math.pow(2, 8)) + (rgbColor.r * Math.pow(2, 16));
 		return rgb.toString(16);
 	}
+
+
+  function getComplementaryColor(a_color, another_color) {
+    var add_color, complementary, c;
+    for (c in a_color) {
+      if (a_color.hasOwnProperty(c)) {
+        add_color[c] = a_color[c] + another_color[c];
+        if (add_color[c] > 255) {
+          add_color[c] = 255;
+        }
+        complementary[c] = 255 - add_color[c];
+      }
+    }
+    return complementary;
+  }
+
 	function linearGradient(b_rgb, e_rgb, percent) {
 		var diff = {}, gradRGB = {}, c;
 		for (c in b_rgb) {
@@ -43,17 +64,21 @@ function make_TangibleColorGauge(min_level, max_level, min_color, max_color, id,
 		}
 		return gradRGB;
 	}
+  function complementaryGradient(){
+    
+  }
 
-	function show_measurement(mes) {
+  function show_measurement(mes) {
 		//console.log('min_level = ' + min_level + ' \t max_level = ' + max_level);
-		mes = parseInt(mes,10);
+		mes = parseInt(mes, 10);
 		//console.log('mes = ' + mes);
 		if (mes < min_level) {
 			mes = min_level;
 		} else if (mes > max_level) {
 			mes = max_level;
 		}
-		var percent = (0.0 + mes - min_level) / (0.0 + max_level - min_level),
+		//var percent = (0.0 + mes - min_level) / (0.0 + max_level - min_level),
+		var percent = (mes - min_level) / (max_level - min_level),
 			color = convertToHex(linearGradient(bColor, eColor, percent));
 		//console.log('mes = ' + mes + ' \t percent = ' + percent );
 		tAPI.showColor(devId, color,
@@ -72,7 +97,7 @@ function make_TangibleColorGauge(min_level, max_level, min_color, max_color, id,
 			console.log('step is undefined');
 			step = 0;
 		}
-		console.log('init step #' + step);
+		console.log('init step #' + step.toString());
 		switch (step) {
 		case 0:
 			//first register
@@ -94,11 +119,16 @@ function make_TangibleColorGauge(min_level, max_level, min_color, max_color, id,
 				},
 				function (data) {
 					console.log('reservation failed: ' + data.msg);
-					init(2);
+					init(3);
 				}
 			);
 			break;
-		case 2:
+    case 2:
+			//let's setup the gauge at the min_level
+			show_measurement(min_level);
+      init(3);
+      break;
+		case 3:
 			//let's make sure that we exit properly
 			var exitProperly = function (e) {
 				var inAnyCase = function () {
@@ -111,8 +141,6 @@ function make_TangibleColorGauge(min_level, max_level, min_color, max_color, id,
 				tAPI.releaseAllDevices(inAnyCase, inAnyCase, false);
 			};
 			addUnloadHandler(exitProperly);
-			//and let's setup the gauge at the min_level
-			show_measurement(min_level);
 			break;
 		default:
 			break;
@@ -120,6 +148,8 @@ function make_TangibleColorGauge(min_level, max_level, min_color, max_color, id,
 	}
 	bColor = convertToRGB(assertColor(min_color, '00ff00'));
 	eColor = convertToRGB(assertColor(max_color, 'ff0000'));
+	mColor = getComplementaryColor(bColor, eColor);
+	med_level = (min_level + max_level) / 2;
 	console.log('about to initialise the component');
 	init();
 
@@ -128,7 +158,7 @@ function make_TangibleColorGauge(min_level, max_level, min_color, max_color, id,
 	};
 }
 
-window.onbeforeunload = function (e){
+window.onbeforeunload = function (e) {
 	"use strict";
 	var handler;
 	while ((handler = beforeunloadHandlers.shift()) !== undefined) {
