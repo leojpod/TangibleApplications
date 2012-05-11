@@ -2,6 +2,6 @@ module TangibleColorGauge where
 
 
 struct Provided where
-	measurement :: Push Int
+	measurement :: Push String
 
-extern make :: Int -> Int -> String -> String -> String -> Class Provided
+extern make :: String -> Int -> Int -> String -> String -> String -> Class Provided

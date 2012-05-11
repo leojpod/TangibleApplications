@@ -16,18 +16,24 @@ CUBE_NUMBER = 0
 
 
 class EventListener(Thread):
-    def __init__(self, host, port):
+    def __init__(self, host, port, uuid):
         super(self.__class__,self).__init__()
         self._connected = False
         self._dont_stop = True
         self._host = host
         self._port = port
+        self._appuuid = uuid;
         self._socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         pass
     def run(self):
         try:
             self._socket.connect( (self._host, self._port) )
             self._connected = True
+            jsonMsg = json.dumps({'flow': 'ctrl', 'msg': self._appuuid})
+            print("about to send the following message through the new socket")
+            print(jsonMsg)
+            self._socket.sendall( jsonMsg.encode('utf-8'))
+            self._socket.sendall( b'\n')
             while(self._dont_stop):
                 self._read()
                 pass
@@ -144,6 +150,24 @@ while True:
     printResponse(resp, content)
     pass
 
+
+sys.stdin.readline()
+
+print("about to make some event testing")
+h = httplib2.Http(".cache")
+resp, content = h.request(baseURI+'/'+appUUID+'/device_methods/'+deviceId+'/subscribe', "PUT")
+printResponse(resp, content)
+print("let's try to connect to the socket")
+msg_obj = json.loads(content.decode('utf-8'))
+port = msg_obj["msg"]["port"]
+port = int(port)
+print("connection information extracted: port=",port)
+sys.stdin.readline()
+listener = EventListener("localhost", port, appUUID)
+listener.start()
+sys.stdin.readline()
+listener.stopASAP()
+
 print()
 print("let's try to display a picture on the cube")
 print("current time is: " + datetime.time(datetime.now()).strftime("%Y-%m-%d %H:%M:%S"))
@@ -165,23 +189,6 @@ else:
     resp, content = h.request(baseURI+'/'+appUUID+'/device_methods/'+deviceId+'/show_picture/', "PUT", filecontent)
     printResponse(resp,content)
     pass
-
-sys.stdin.readline()
-
-print("about to make some event testing")
-h = httplib2.Http(".cache")
-resp, content = h.request(baseURI+'/'+appUUID+'/device_methods/'+deviceId+'/subscribe', "PUT")
-printResponse(resp, content)
-print("let's try to connect to the socket")
-msg_obj = json.loads(content.decode('utf-8'))
-port = msg_obj["msg"]["port"]
-port = int(port)
-print("connection information extracted: port=",port)
-sys.stdin.readline()
-listener = EventListener("localhost", port)
-listener.start()
-
-
 
 
 sys.stdin.readline()

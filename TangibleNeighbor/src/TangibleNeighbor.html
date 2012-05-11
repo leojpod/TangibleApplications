@@ -4,7 +4,7 @@
 
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width"/>
-		<title>TangibleColorDisplay</title>
+		<title>TangibleNeighbor</title>
 		<link rel="stylesheet" type="text/css" href="satin.css" />
 
 		<script src="http://www8.cs.umu.se/~bopspe/javascript/prototype.js" type="text/javascript"></script>
@@ -17,7 +17,7 @@
 			</script>
 		
 	
-		<script type="text/javascript" src="TangibleColorDisplay.extern.js"></script>
+		<script type="text/javascript" src="TangibleNeighbor.extern.js"></script>
 <script type="text/javascript">
 function objectToString(o) {
 	var parse = function(_o) {
@@ -43,13 +43,13 @@ function objectToString(o) {
 </script>
 <script type="text/javascript">
 function setupComponent(form) {
-	TangibleColorDisplay_provides = make_TangibleColorDisplay(form.device_label.value, form.id.value, {});
+	TangibleNeighbor_provides = make_TangibleNeighbor(form.first_device_label.value, form.second_device_label.value, form.reportingOption.value, form.id.value, {onNeighbor: onNeighbor});
 }
 
-
-function call_color() {
-	TangibleColorDisplay_provides.color(document.testControls.color.value);
+function onNeighbor() {
+	alert("Port onNeighbor was triggered.");
 }
+
 
 </script>
 
@@ -59,12 +59,15 @@ function call_color() {
 	<tr><td>
 <form name='testControls'>
 <table style='background-color:LightGray;'><tr><th colspan='2'>Constructor Parameters:</th></tr>
-<tr><td>device_label:</td><td><input type='text' name='device_label' value='ColorCube' /></td></tr>
+<tr><td>first_device_label:</td><td><input type='text' name='first_device_label' value='aCube' /></td></tr>
 <tr><td></td><td>String</td></tr>
-<tr><td>id:</td><td><input type='text' name='id' value='TangibleColorDisplay' disabled='disabled' /></td></tr>
-<tr><th colspan='2'>Provided Ports:</th></tr>
-<tr><td>color:</td><td><input type='text' name='color' /><input type='button' value='Call Port' onClick='call_color()' /></td></tr>
+<tr><td>second_device_label:</td><td><input type='text' name='second_device_label' value='anotherCube' /></td></tr>
 <tr><td></td><td>String</td></tr>
+<tr><td>reportingOption:</td><td><input type='text' name='reportingOption' value='onNeighborAdded' /></td></tr>
+<tr><td></td><td>String</td></tr>
+<tr><td>id:</td><td><input type='text' name='id' value='TangibleNeighbor' disabled='disabled' /></td></tr>
+<tr><th colspan='2'>Required Ports:</th></tr>
+<tr><td>onNeighbor:</td><td></td></tr>
 
 <tr><td colspan='2'><input type='button' value='Setup Component' onClick='setupComponent(this.form)' /></td></tr>
 </table></form><br/>

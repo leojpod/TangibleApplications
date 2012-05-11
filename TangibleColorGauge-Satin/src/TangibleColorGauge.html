@@ -13,7 +13,7 @@
 
 		
 		
-			<script type="text/javascript" src="http://localhost:9998/resources/tangibleLib.js">
+			<script type="text/javascript" src="http://localhost:9998/resources/tangibleLibLoader.js">
 			</script>
 		
 	
@@ -43,7 +43,7 @@ function objectToString(o) {
 </script>
 <script type="text/javascript">
 function setupComponent(form) {
-	TangibleColorGauge_provides = make_TangibleColorGauge(form.min_level.value, form.max_level.value, form.min_color.value, form.max_color.value, form.id.value, {});
+	TangibleColorGauge_provides = make_TangibleColorGauge(form.device_label.value, form.min_level.value, form.max_level.value, form.min_color.value, form.max_color.value, form.id.value, {});
 }
 
 
@@ -59,18 +59,20 @@ function call_measurement() {
 	<tr><td>
 <form name='testControls'>
 <table style='background-color:LightGray;'><tr><th colspan='2'>Constructor Parameters:</th></tr>
-<tr><td>min_level:</td><td><input type='text' name='min_level' /></td></tr>
-<tr><td></td><td>Int</td></tr>
-<tr><td>max_level:</td><td><input type='text' name='max_level' /></td></tr>
-<tr><td></td><td>Int</td></tr>
-<tr><td>min_color:</td><td><input type='text' name='min_color' /></td></tr>
+<tr><td>device_label:</td><td><input type='text' name='device_label' value='GaugeCube' /></td></tr>
 <tr><td></td><td>String</td></tr>
-<tr><td>max_color:</td><td><input type='text' name='max_color' /></td></tr>
+<tr><td>min_level:</td><td><input type='text' name='min_level' value='0' /></td></tr>
+<tr><td></td><td>Int</td></tr>
+<tr><td>max_level:</td><td><input type='text' name='max_level' value='50' /></td></tr>
+<tr><td></td><td>Int</td></tr>
+<tr><td>min_color:</td><td><input type='text' name='min_color' value='00ff00' /></td></tr>
 <tr><td></td><td>String</td></tr>
-<tr><td>id:</td><td><input type='text' name='id' disabled='disabled' value='TangibleColorGauge' /></td></tr>
+<tr><td>max_color:</td><td><input type='text' name='max_color' value='ff0000' /></td></tr>
+<tr><td></td><td>String</td></tr>
+<tr><td>id:</td><td><input type='text' name='id' value='TangibleColorGauge' disabled='disabled' /></td></tr>
 <tr><th colspan='2'>Provided Ports:</th></tr>
 <tr><td>measurement:</td><td><input type='text' name='measurement' /><input type='button' value='Call Port' onClick='call_measurement()' /></td></tr>
-<tr><td></td><td>Int</td></tr>
+<tr><td></td><td>String</td></tr>
 
 <tr><td colspan='2'><input type='button' value='Setup Component' onClick='setupComponent(this.form)' /></td></tr>
 </table></form><br/>

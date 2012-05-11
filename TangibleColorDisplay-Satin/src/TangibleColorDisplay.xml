@@ -12,6 +12,11 @@
 	
 	<!--Configuration parameters -->
 	<config>
+		<param default="ColorCube" name="device_label" type="String"/>
+			<!-- <description>
+				<![CDATA[Name the device you want to use, if Tangible component use the same label they will share the same device]]>
+			</description> 
+		</param> -->
 	</config>
 	
 	<!--Required interface: a number of push or pull ports -->
@@ -25,7 +30,7 @@
 	
 	<apis>
 		<![CDATA[
-			<script type="text/javascript" src="http://localhost:9998/resources/tangibleLib.js">
+			<script type="text/javascript" src="http://localhost:9998/resources/tangibleLibLoader.js">
 			</script>
 		]]>
 	</apis>
