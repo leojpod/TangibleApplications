@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<component xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.rustle.no-ip.info/satin/eclipse/schema/SatinComponentSchema.xsd">
+	
+	<!--Url to the icon that represent the component in the editor -->
+	<icon>http://satin.codemill.se:81/compicons/fb1abfb7-135a-4e3b-bc65-510409564a30.png</icon>
+	
+	<!--Unique identifier for the component -->
+	<name>TangiblePicture</name>
+	
+	<!--Description of the component -->
+	<info><![CDATA[Allow to show a picture on the components]]></info>
+	
+	<!--Configuration parameters -->
+	<config>
+		<param default="PictureCube" name="device_label" type="String"/>
+		<param default="https://github.com/lojeuv/SiftDriver/raw/master/cover.png" name="initial_picture" type="String"/>
+		<param default="True" name="show_at_start" type="Bool"/>
+	</config>
+	
+	<!--Required interface: a number of push or pull ports -->
+	<requires>
+	</requires>
+	
+	<!--Provided interface: a number of push or pull ports -->
+	<provides>
+		<port argtype="String" kind="Push" name="show_picture"/>
+	</provides>
+	
+	<apis>
+		<![CDATA[
+			<script type="text/javascript" src="https://raw.github.com/lojeuv/TangibleAPI/master/resources/tangibleLib.js">
+			</script>
+<!-- 			<script type="text/javascript" src="https://raw.github.com/lojeuv/TangibleAPI/master/resources/tangibleLib.js"> -->
+<!-- 			</script> -->
+		]]>
+	</apis>
+	
+	<!-- The function with component code, may be omitted -->
+	<code_ext>TangiblePicture.extern.js</code_ext>
+</component>

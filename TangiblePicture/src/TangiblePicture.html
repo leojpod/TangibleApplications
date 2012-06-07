@@ -4,7 +4,7 @@
 
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width"/>
-		<title>TangibleColorGauge</title>
+		<title>TangiblePicture</title>
 		<link rel="stylesheet" type="text/css" href="satin.css" />
 
 		<script src="http://www8.cs.umu.se/~bopspe/javascript/prototype.js" type="text/javascript"></script>
@@ -13,13 +13,13 @@
 
 		
 		
-			<script type="text/javascript" src="http://localhost:9998/resources/tangibleLibLoader.js">
+			<script type="text/javascript" src="https://raw.github.com/lojeuv/TangibleAPI/master/resources/tangibleLib.js">
 			</script>
-<!-- 			<script type="text/javascropt" src="https://raw.github.com/lojeuv/TangibleAPI/master/resources/tangibleLib.js"> -->
+<!-- 			<script type="text/javascript" src="https://raw.github.com/lojeuv/TangibleAPI/master/resources/tangibleLib.js"> -->
 <!-- 			</script> -->
 		
 	
-		<script type="text/javascript" src="TangibleColorGauge.extern.js"></script>
+		<script type="text/javascript" src="TangiblePicture.extern.js"></script>
 <script type="text/javascript">
 function objectToString(o) {
 	var parse = function(_o) {
@@ -45,12 +45,12 @@ function objectToString(o) {
 </script>
 <script type="text/javascript">
 function setupComponent(form) {
-	TangibleColorGauge_provides = make_TangibleColorGauge(form.device_label.value, form.min_level.value, form.max_level.value, form.min_color.value, form.max_color.value, form.id.value, {});
+	TangiblePicture_provides = make_TangiblePicture(form.device_label.value, form.initial_picture.value, form.show_at_start.checked, form.id.value, {});
 }
 
 
-function call_measurement() {
-	TangibleColorGauge_provides.measurement(document.testControls.measurement.value);
+function call_show_picture() {
+	TangiblePicture_provides.show_picture(document.testControls.show_picture.value);
 }
 
 </script>
@@ -61,19 +61,15 @@ function call_measurement() {
 	<tr><td>
 <form name='testControls'>
 <table style='background-color:LightGray;'><tr><th colspan='2'>Constructor Parameters:</th></tr>
-<tr><td>device_label:</td><td><input type='text' name='device_label' value='GaugeCube' /></td></tr>
+<tr><td>device_label:</td><td><input type='text' name='device_label' value='PictureCube' /></td></tr>
 <tr><td></td><td>String</td></tr>
-<tr><td>min_level:</td><td><input type='text' name='min_level' value='0' /></td></tr>
-<tr><td></td><td>Int</td></tr>
-<tr><td>max_level:</td><td><input type='text' name='max_level' value='50' /></td></tr>
-<tr><td></td><td>Int</td></tr>
-<tr><td>min_color:</td><td><input type='text' name='min_color' value='00ff00' /></td></tr>
+<tr><td>initial_picture:</td><td><input type='text' name='initial_picture' value='https://github.com/lojeuv/SiftDriver/raw/master/cover.png' /></td></tr>
 <tr><td></td><td>String</td></tr>
-<tr><td>max_color:</td><td><input type='text' name='max_color' value='ff0000' /></td></tr>
-<tr><td></td><td>String</td></tr>
-<tr><td>id:</td><td><input type='text' name='id' value='TangibleColorGauge' disabled='disabled' /></td></tr>
+<tr><td>show_at_start:</td><td><input type='checkbox' name='show_at_start' value='show_at_start' checked='show_at_start' /></td></tr>
+<tr><td></td><td>Bool</td></tr>
+<tr><td>id:</td><td><input type='text' name='id' value='TangiblePicture' checked='show_at_start' disabled='disabled' /></td></tr>
 <tr><th colspan='2'>Provided Ports:</th></tr>
-<tr><td>measurement:</td><td><input type='text' name='measurement' /><input type='button' value='Call Port' onClick='call_measurement()' /></td></tr>
+<tr><td>show_picture:</td><td><input type='text' name='show_picture' /><input type='button' value='Call Port' onClick='call_show_picture()' /></td></tr>
 <tr><td></td><td>String</td></tr>
 
 <tr><td colspan='2'><input type='button' value='Setup Component' onClick='setupComponent(this.form)' /></td></tr>

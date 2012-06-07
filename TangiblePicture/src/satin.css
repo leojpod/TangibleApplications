@@ -1,0 +1,98 @@
+body {
+	background-color:#FFFFFF;
+	margin: 0;
+	padding: 0;
+}
+
+#gui {
+	margin: 0;
+	padding: 0;
+	font-family: Verdana, Arial, Helvetica;
+	font-size: 1.6em;
+}
+
+#main_div {
+	margin: 0;
+	padding: 0;
+}
+
+/*
+Clearfix - Fixes this issue with float:
+
+"When a float is contained within a container box that has a visible border or background, 
+that float does not automatically force the container's bottom edge down as the float is 
+made taller. Instead the float is ignored by the container and will hang down out of the 
+container bottom like a flag."
+
+http://www.positioniseverything.net/easyclearing.html
+*/
+
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+
+/*
+Styling for PersonDisplay component
+*/
+
+div.persondisplay_div 
+{
+  width: 100%;
+  border: 1px solid black;
+  background-color: skyblue;
+}
+
+.persondisplay-picture
+{
+  width: 100px;
+  height: 100px;
+  margin: 10px 10px 5px 10px;
+  float: left;	
+  background-color: white;
+}
+
+div.persondisplay-name
+{
+  float: left;
+  padding: 30px 0 10px 10px
+}
+
+div.persondisplay-contact
+{
+  margin: 0 0 0 10px;		
+  clear: both;
+}
+
+div.persondisplay-address
+{
+  margin: 0 0 0 10px;	
+  float: left;
+}
+
+
+/*
+END Styling for PersonDisplay component END
+*/
+
+
+/*
+Styling for PositionDisplay component
+*/
+
+#positiondisplay-div
+{
+  width: 100%;
+  border: 1px solid black;
+  font-size: 1.8em;
+  background-color: OldLace;
+  padding: 0 0 0 5px;
+}
+
+/*
+END Styling for PositionDisplay component END
+*/

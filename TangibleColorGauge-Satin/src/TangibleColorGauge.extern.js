@@ -68,20 +68,23 @@ function make_TangibleColorGauge(device_label, min_level, max_level, min_color, 
 	}
 
 	function show_measurement(mes) {
+		var prefix = "";
 		// console.log('min_level = ' + min_level + ' \t max_level = ' + max_level);
 		mes = parseFloat(mes, 10);
 		// console.log('mes = ' + mes);
 		if (mes < min_level) {
 			mes = min_level;
+			prefix = "< ";
 		} else if (mes > max_level) {
 			mes = max_level;
+			prefix = "> ";
 		}
 		// var percent = (0.0 + mes - min_level) / (0.0 + max_level - min_level),
 		var percent = (mes - min_level) / (max_level - min_level),
 			color = convertToHex(complementaryGradient(bColor, mColor, eColor, percent));
 		// console.log('mes = ' + mes + ' \t percent = ' + percent );
 		tAPI.showColor(devId, color, function () {
-			tAPI.showText(devId, mes, function () {
+			tAPI.showText(devId, '000000', prefix + mes, function () {
 				console.log('gauge updated');
 			}, function (d) {
 				console.log('woops: ' + d.msg);

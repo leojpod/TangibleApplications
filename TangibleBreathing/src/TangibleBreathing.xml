@@ -2,21 +2,18 @@
 <component xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.rustle.no-ip.info/satin/eclipse/schema/SatinComponentSchema.xsd">
 	
 	<!--Url to the icon that represent the component in the editor -->
-	<icon>http://satin.codemill.se:81/compicons/78fd9218-f244-4f32-b1ee-a38609612071.png</icon>
+	<icon>http://satin.codemill.se:81/compicons/749e3556-079c-435b-b27e-9243e8631f81.png</icon>
 	
 	<!--Unique identifier for the component -->
-	<name>TangibleColorGauge</name>
+	<name>TangibleBreathing</name>
 	
 	<!--Description of the component -->
-	<info><![CDATA[Use one device to represent a given measurement with a color.]]></info>
+	<info><![CDATA[select a tangible interface and make it breath]]></info>
 	
 	<!--Configuration parameters -->
 	<config>
-		<param default="GaugeCube" name="device_label" type="String"/>
-		<param default="0" name="min_level" type="Int"/>
-		<param default="50" name="max_level" type="Int"/>
-		<param default="00ff00" name="min_color" type="String"/>
-		<param default="ff0000" name="max_color" type="String"/>
+		<param default="BreathCube" name="device_label" type="String"/>
+		<param default="ff0000" name="color" type="String"/>
 	</config>
 	
 	<!--Required interface: a number of push or pull ports -->
@@ -25,18 +22,17 @@
 	
 	<!--Provided interface: a number of push or pull ports -->
 	<provides>
-		<port argtype="String" kind="Push" name="measurement"/>
+		<port kind="Push" name="start_breathing"/>
+		<port kind="Push" name="stop_breathing"/>
 	</provides>
 	
 	<apis>
 		<![CDATA[
 			<script type="text/javascript" src="http://localhost:9998/resources/tangibleLibLoader.js">
 			</script>
-<!-- 			<script type="text/javascropt" src="https://raw.github.com/lojeuv/TangibleAPI/master/resources/tangibleLib.js"> -->
-<!-- 			</script> -->
 		]]>
 	</apis>
 	
 	<!-- The function with component code, may be omitted -->
-	<code_ext>TangibleColorGauge.extern.js</code_ext>
+	<code_ext>TangibleBreathing.extern.js</code_ext>
 </component>
