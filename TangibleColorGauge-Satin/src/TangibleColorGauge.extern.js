@@ -84,8 +84,8 @@ function make_TangibleColorGauge(device_label, min_level, max_level, min_color, 
 			color = convertToHex(complementaryGradient(bColor, mColor, eColor, percent));
 		// console.log('mes = ' + mes + ' \t percent = ' + percent );
 		tAPI.showColor(devId, color, function () {
-			tAPI.showText(devId, '000000', prefix + mes, function () {
-				console.log('gauge updated');
+			tAPI.showText(devId, prefix + mes, '000000', function () {
+				console.log('gauge updated: ' + prefix + mes);
 			}, function (d) {
 				console.log('woops: ' + d.msg);
 			});
