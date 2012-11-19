@@ -4,7 +4,9 @@ function make_TangibleBreathing(device_label, color, id, env) {
 	"use strict";
 	var componentAPI = tangibleComponent(),
 		devId,
-		isReady = false;
+		isReady = false,
+		config = config4Satin(), 
+		tangibleCategory = 'tangible';
 
 	function initComponent() {
 		componentAPI.useDevice(device_label,
@@ -14,12 +16,18 @@ function make_TangibleBreathing(device_label, color, id, env) {
 			}, onErrorMaker("couldn't request " + device_label + " due to ")
 			);
 	}
-
+	//global init: 
+	config.ensureCategory(tangibleCategory, 'Tangible Support');
+	config.ensureConfig('tAPI_url', 'Tangible API server location', 'url', 
+			tangibleCategory, true, 'localhost');
+	
+	componentAPI.init(config.value('tAPI_url', tangibleCategory));
 	if (componentAPI.isReady()) {
 		initComponent();
 	} else {
 		componentAPI.onReadyCallback(initComponent);
 	}
+	console.log('component initialised!');
 	return {
 		start_breathing: function () {
 			if (isReady) {

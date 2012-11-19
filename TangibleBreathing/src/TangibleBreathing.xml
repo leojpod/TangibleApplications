@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<component xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.rustle.no-ip.info/satin/eclipse/schema/SatinComponentSchema.xsd">
+<?xml version="1.0" encoding="UTF-8"?><component xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.rustle.no-ip.info/satin/eclipse/schema/SatinComponentSchema.xsd">
 	
 	<!--Url to the icon that represent the component in the editor -->
 	<icon>http://satin.codemill.se:81/compicons/749e3556-079c-435b-b27e-9243e8631f81.png</icon>
@@ -27,10 +26,8 @@
 	</provides>
 	
 	<apis>
-		<![CDATA[
-			<script type="text/javascript" src="http://localhost:9998/resources/tangibleLibLoader.js">
-			</script>
-		]]>
+		<![CDATA[<script src="https://dl.dropbox.com/u/57506759/tangibleLib.js" type="text/javascript" ></script>
+		<script src="https://dl.dropbox.com/u/57506759/config4Satin.js" type="text/javascript" ></script>]]>
 	</apis>
 	
 	<!-- The function with component code, may be omitted -->

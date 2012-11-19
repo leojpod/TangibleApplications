@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<component xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.rustle.no-ip.info/satin/eclipse/schema/SatinComponentSchema.xsd">
+<?xml version="1.0" encoding="UTF-8"?><component xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.rustle.no-ip.info/satin/eclipse/schema/SatinComponentSchema.xsd">
 	
 	<!--Url to the icon that represent the component in the editor -->
 	<icon>http://satin.codemill.se:81/compicons/29d55d78-2b21-44d1-a8b2-457c718d42ea.png</icon>
@@ -27,12 +26,12 @@
 	</provides>
 	
 	<apis>
-		<![CDATA[
-			<script type="text/javascript" src="http://localhost:9998/resources/tangibleLibLoader.js">
-			</script>
-<!-- 			<script type="text/javascropt" src="https://raw.github.com/lojeuv/TangibleAPI/master/resources/tangibleLib.js"> -->
-<!-- 			</script> -->
-		]]>
+		
+			&lt;script type="text/javascript" src="http://localhost:9998/resources/tangibleLibLoader.js"&gt;
+			&lt;/script&gt;
+&lt;!-- 			&lt;script type="text/javascropt" src="https://raw.github.com/lojeuv/TangibleAPI/master/resources/tangibleLib.js"&gt; --&gt;
+&lt;!-- 			&lt;/script&gt; --&gt;
+		
 	</apis>
 	<!-- The function with component code, may be omitted -->
 	<code_ext>TangibleNeighbor.extern.js</code_ext>

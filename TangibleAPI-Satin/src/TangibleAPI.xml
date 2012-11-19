@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<component xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.rustle.no-ip.info/satin/eclipse/schema/SatinComponentSchema.xsd">
+<?xml version="1.0" encoding="UTF-8"?><component xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.rustle.no-ip.info/satin/eclipse/schema/SatinComponentSchema.xsd">
 	
 	<!--Url to the icon that represent the component in the editor -->
 	<icon>http://www8.cs.umu.se/~bopspe/SATIN2/editor/icons/SM002-1.1.png</icon>
