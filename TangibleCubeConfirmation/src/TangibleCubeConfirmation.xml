@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?><component xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.rustle.no-ip.info/satin/eclipse/schema/SatinComponentSchema.xsd">
+	
+	<!--Url to the icon that represent the component in the editor -->
+	<icon>http://satin.codemill.se:81/compicons/43105316-751e-4fa4-9353-05300a4cb6f6.png</icon>
+	
+	<!--Unique identifier for the component -->
+	<name>TangibleCubeConfirmation</name>
+	
+	<!--Description of the component -->
+	<info><![CDATA[Use the selected device to register a confirmation from the user.]]></info>
+	
+	<!--Configuration parameters -->
+	<config>
+		<param default="ConfirmCube" name="device_label" type="String"/>
+		<param default="shake" name="trigger_action" type="String"/>
+		<param default="" name="custom_message" type="String"/>
+	</config>
+	
+	<!--Required interface: a number of push or pull ports -->
+	<requires>
+		<port kind="Push" name="confirmed"/>
+	</requires>
+	
+	<!--Provided interface: a number of push or pull ports -->
+	<provides>
+		<port kind="Push" name="confirmation_required"/>
+	</provides>
+	
+<!-- 	<libs> -->
+<!-- 		<lib><![CDATA[<script type="text/javascript" src="http://130.240.94.8:9998/resources/tangibleLibLoader.js"> </script>]]></lib> -->
+<!--   			<script type="text/javascropt" src="https://raw.github.com/lojeuv/TangibleAPI/master/resources/tangibleLib.js">  --> 
+<!--   			<script>  --> 
+<!-- 	</libs> -->
+	
+	<interface><![CDATA[<div id="IdPlaceHolder" />]]></interface>
+	
+	<apis>
+		<![CDATA[<script src="https://dl.dropbox.com/u/57506759/tangibleLib.js" type="text/javascript" ></script>
+		<script src="https://dl.dropbox.com/u/57506759/config4Satin.js" type="text/javascript" ></script>]]>
+	</apis>
+	
+	<!-- The function with component code, may be omitted -->
+	<code_ext>TangibleCubeConfirmation.extern.js</code_ext>
+</component>
