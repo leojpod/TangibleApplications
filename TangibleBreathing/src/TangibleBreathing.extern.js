@@ -1,5 +1,5 @@
 /*jslint devel: true */
-/*global TangibleAPI: false, tangibleComponent: false, onErrorMaker: false */
+/*global TangibleAPI: false, tangibleComponent: false, onErrorMaker: false, config4Satin: false*/
 function make_TangibleBreathing(device_label, color, id, env) {
 	"use strict";
 	var componentAPI = tangibleComponent(),

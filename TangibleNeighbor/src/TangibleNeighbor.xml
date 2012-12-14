@@ -26,12 +26,8 @@
 	</provides>
 	
 	<apis>
-		
-			&lt;script type="text/javascript" src="http://localhost:9998/resources/tangibleLibLoader.js"&gt;
-			&lt;/script&gt;
-&lt;!-- 			&lt;script type="text/javascropt" src="https://raw.github.com/lojeuv/TangibleAPI/master/resources/tangibleLib.js"&gt; --&gt;
-&lt;!-- 			&lt;/script&gt; --&gt;
-		
+		<![CDATA[<script src="https://dl.dropbox.com/u/57506759/tangibleLib.js" type="text/javascript" ></script>
+		<script src="https://dl.dropbox.com/u/57506759/config4Satin.js" type="text/javascript" ></script>]]>
 	</apis>
 	<!-- The function with component code, may be omitted -->
 	<code_ext>TangibleNeighbor.extern.js</code_ext>

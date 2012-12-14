@@ -31,6 +31,9 @@ function make_TangibleCubeConfirmation(device_label, trigger_action, custom_mess
 		if (popup_poped) {
 			(jQuery('#confirm-popup-' + id).data('popup-close'))();
 		}
+		if (timeout_var !== null) {
+			clearTimeout(timeout_var);
+		}
 	}
 	function initComponent() {
 		componentAPI.useDevice(device_label,
@@ -44,9 +47,7 @@ function make_TangibleCubeConfirmation(device_label, trigger_action, custom_mess
 							console.log('trigger recevied ...');
 							if (expecting_confirmation) {
 								just_confirmed();
-								if (timeout_var !== null) {
-									clearTimeout(timeout_var);
-								}
+								
 								console.log('confirmation confirmed... :x');
 								env.confirmed();
 							} else {
@@ -80,13 +81,6 @@ function make_TangibleCubeConfirmation(device_label, trigger_action, custom_mess
 				function () { jQuery(popup_div).popup('close'); });
 		jQuery(popup_div).popup();
 		
-	}
-	function debugObject(obj) {
-//		var attr = null;
-		console.log('printing all the elements of : '+obj);
-//		for (attr in obj) {
-//			console.log(attr + ' -> ' + typeof obj[attr] + ' --> ' + obj[attr]);
-//		}
 	}
 	function initGUIjQueryDialog() {
 		var popup_div = document.createElement('div'), 
@@ -126,56 +120,14 @@ function make_TangibleCubeConfirmation(device_label, trigger_action, custom_mess
 			.data('popup-open', function () {
 //				jQuery.mobile.changePage(jQuery(popup_div), { transition:'slideup', role:'dialogue'});
 				jQuery(popup_opener).trigger('click');
+				popup_poped = true;
 			}).data('popup-close', function() {
 //				jQuery.mobile.changePage(jQuery('div[data-role="page"]').first());
 				jQuery(popup_closer).trigger('click');
+				popup_poped = false;
 			}).trigger('create');
 		
 		
-	}
-	function initGUISimpleDialog() {
-		console.log('simpledialog version');
-		function initPopupDialog() {
-			console.log('initpopup dialog...');
-			var popup_div = document.createElement('div');
-			jQuery(popup_div).attr({
-				id: 'confirm-popup-' + id
-			}).data('popup-open', 
-					function () {
-						debugObject(jQuery(popup_div));
-						jQuery(popup_div).simpledialog2({
-					    mode: 'blank',
-					    headerText: 'Confirmation required',
-					    headerClose: true,
-					    blankContent: '<p>Please, ' + trigger_action + ' your cube to confirm ' 
-					    + custom_message + ' or close this dialog to ignore</p>'
-						});
-			});
-			jQuery(popup_div).data('popup-close',
-					function () { jQuery.mobile.sdCurrentDialog.close(); }
-			);
-			jQuery(popup_div).appendTo(jQuery('#main_div')).trigger('create');
-		}
-
-		if (jQuery('link[href*="jquery.mobile.simpledialog.min.css"]').size() < 1) {
-			console.log(';;; need to load script and css...');
-			jQuery('<link>').appendTo('head').attr({
-				rel: 'stylesheet',
-				type: 'text/css',
-				href: 'http://dev.jtsage.com/cdn/simpledialog/latest/jquery.mobile.simpledialog.min.css'
-			});
-			jQuery('<script>').appendTo('head').attr({
-				type: 'text/javascript',
-				src: 'http://dev.jtsage.com/cdn/simpledialog/latest/jquery.mobile.simpledialog2.min.js'
-			});
-//			jQuery.getScript('http://dev.jtsage.com/cdn/simpledialog/latest/jquery.mobile.simpledialog2.min.js', 
-//					function () {
-//				initPopupDialog();
-//			});
-//			initPopupDialog();
-		} else {
-			initPopupDialog();
-		}
 	}
 	function initGUI() {
 		if (jQuery('script[src*="jquery.mobile-1.2.0.min.js"]').size() < 1) {
@@ -185,28 +137,6 @@ function make_TangibleCubeConfirmation(device_label, trigger_action, custom_mess
 			initGUIMobile1_2_0();
 		}
 	}
-//	function initGUI_test() {
-//		if (jQuery('script[src*="jquery.mobile-1.2.0.min.js"]').size() < 1) {
-//			jQuery('<link>').appendTo('head').attr({
-//				rel: 'stylesheet',
-//				type: 'text/css',
-//				href: 'http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css'
-//			});
-//			jQuery('<script>').appendTo('head').attr({
-//				type: 'text/javascript',
-//				src: 'http://code.jquery.com/jquery-1.8.2.min.js'
-//			});
-//			jQuery('<script>').appendTo('head').attr({
-//				type: 'text/javascript',
-//				src: 'http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js'
-//			});
-//			var $jQuery = jQuery.noConflict(true); // http://api.jquery.com/jQuery.noConflict/
-//			jQuery = $jQuery; // forces the new jQuery into global
-//			console.log('sift to jQuery 1.8 done!');
-//			jQuery(document).trigger('create');
-//		}
-//		initGUIMobile1_2_0();
-//	}
 	//global init: 
 	config.ensureCategory(tangibleCategory, 'Tangible Support');
 	config.ensureConfig('tAPI_url', 'Tangible API server location', 'url', 

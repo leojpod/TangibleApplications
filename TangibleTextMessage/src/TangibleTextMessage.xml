@@ -1,21 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?><component xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.rustle.no-ip.info/satin/eclipse/schema/SatinComponentSchema.xsd">
 	
 	<!--Url to the icon that represent the component in the editor -->
-	<icon>http://satin.codemill.se:81/compicons/78fd9218-f244-4f32-b1ee-a38609612071.png</icon>
+	<icon>http://satin.codemill.se:81/compicons/881f1d6b-d78b-4ed7-85d2-adfb59a9d391.png</icon>
 	
 	<!--Unique identifier for the component -->
-	<name>TangibleColorGauge</name>
+	<name>TangibleTextMessage</name>
 	
 	<!--Description of the component -->
-	<info><![CDATA[Use one device to represent a given measurement with a color.]]></info>
+	<info><![CDATA[Use one device to display a message of a given color on the specified background]]></info>
 	
 	<!--Configuration parameters -->
 	<config>
-		<param default="GaugeCube" name="device_label" type="String"/>
-		<param default="0" name="min_level" type="Int"/>
-		<param default="50" name="max_level" type="Int"/>
-		<param default="00ff00" name="min_color" type="String"/>
-		<param default="ff0000" name="max_color" type="String"/>
+		<param default="MessageCube" name="device_label" type="String"/>
+		<param default="000000" name="default_text_color" type="String"/>
+		<param default="ffffff" name="default_background_color" type="String"/>
 	</config>
 	
 	<!--Required interface: a number of push or pull ports -->
@@ -24,14 +22,16 @@
 	
 	<!--Provided interface: a number of push or pull ports -->
 	<provides>
-		<port argtype="m" kind="Push" name="measurement"/>
+		<port argtype="String" kind="Push" name="text"/>
+		<port argtype="String" kind="Push" name="new_text_color"/>
+		<port argtype="String" kind="Push" name="new_background_color"/>
 	</provides>
 	
 	<apis>
 		<![CDATA[<script src="https://dl.dropbox.com/u/57506759/tangibleLib.js" type="text/javascript" ></script>
-<!-- 		<script src="https://dl.dropbox.com/u/57506759/config4Satin.js" type="text/javascript" ></script>]]> --&gt;
+		<script src="https://dl.dropbox.com/u/57506759/config4Satin.js" type="text/javascript" ></script>]]>
 	</apis>
 	
 	<!-- The function with component code, may be omitted -->
-	<code_ext>TangibleColorGauge.extern.js</code_ext>
+	<code_ext>TangibleTextMessage.extern.js</code_ext>
 </component>

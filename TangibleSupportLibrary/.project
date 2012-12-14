@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>TangibleConfigurator</name>
+	<name>TangibleSupportLibrary</name>
 	<comment></comment>
 	<projects>
 	</projects>
 	<buildSpec>
 		<buildCommand>
-			<name>Satin_Eclipse_Plugin.satinComponentBuilder</name>
+			<name>org.eclipse.wst.jsdt.core.javascriptValidator</name>
 			<arguments>
 			</arguments>
 		</buildCommand>
@@ -17,7 +17,7 @@
 		</buildCommand>
 	</buildSpec>
 	<natures>
-		<nature>Satin_Eclipse_Plugin.satinComponentNature</nature>
+		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
 		<nature>com.googlecode.jslint4java.eclipse.jsLintNature</nature>
 	</natures>
 </projectDescription>

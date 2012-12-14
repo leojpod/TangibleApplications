@@ -1,10 +1,12 @@
 /*jslint devel: true */
-/*global TangibleAPI: false, tangibleComponent: false, onErrorMaker: false */
+/*global TangibleAPI: false, tangibleComponent: false, onErrorMaker: false, config4Satin: false */
 function make_TangiblePicture(device_label, initial_picture, show_at_start, id, env) {
 	"use strict";
 	var componentAPI = tangibleComponent(),
 		devId,
 		tAPI,
+		config = config4Satin(), 
+		tangibleCategory = 'tangible',
 		isReady = false;
 
 	function initComponent() {
@@ -22,7 +24,12 @@ function make_TangiblePicture(device_label, initial_picture, show_at_start, id, 
 			}, onErrorMaker("couldn't request " + device_label + " due to ")
 			);
 	}
-
+	//global init: 
+	config.ensureCategory(tangibleCategory, 'Tangible Support');
+	config.ensureConfig('tAPI_url', 'Tangible API server location', 'url', 
+			tangibleCategory, true, 'localhost');
+	
+	componentAPI.init(config.value('tAPI_url', tangibleCategory));
 	if (componentAPI.isReady()) {
 		initComponent();
 	} else {

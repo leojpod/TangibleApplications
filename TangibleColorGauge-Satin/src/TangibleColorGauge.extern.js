@@ -1,13 +1,13 @@
 /*jslint devel: true,  */
-/*global TangibleAPI: false, tangibleComponent: false */
-
-
+/*global TangibleAPI: false, tangibleComponent: false, config4Satin: false, isNan: false */
 function make_TangibleColorGauge(device_label, min_level, max_level, min_color, max_color,
 		id, env) {
 	"use strict";
 	var componentAPI = tangibleComponent(),
 		tAPI,
 		devId = null,
+		config = config4Satin(), 
+		tangibleCategory = 'tangible',
 		bColor,
 		mColor,
 		med_level,
@@ -70,7 +70,7 @@ function make_TangibleColorGauge(device_label, min_level, max_level, min_color, 
 	function show_measurement(mes) {
 		var prefix = "";
 		// console.log('min_level = ' + min_level + ' \t max_level = ' + max_level);
-		mes = parseFloat(mes, 10);
+		//mes = parseFloat(mes, 10);
 		// console.log('mes = ' + mes);
 		if (mes < min_level) {
 			mes = min_level;
@@ -110,6 +110,13 @@ function make_TangibleColorGauge(device_label, min_level, max_level, min_color, 
 	mColor = getComplementaryColor(bColor, eColor);
 	med_level = (min_level + max_level) / 2;
 	console.log('about to initialise the component');
+	
+	//global init: 
+	config.ensureCategory(tangibleCategory, 'Tangible Support');
+	config.ensureConfig('tAPI_url', 'Tangible API server location', 'url', 
+			tangibleCategory, true, 'localhost');
+	
+	componentAPI.init(config.value('tAPI_url', tangibleCategory));
 	if (componentAPI.isReady()) {
 		initComponent();
 	} else {
@@ -117,9 +124,10 @@ function make_TangibleColorGauge(device_label, min_level, max_level, min_color, 
 	}
 
 	return {
-		measurement : function (str) {
-			if (devId !== undefined) {
-				show_measurement(str);
+		measurement : function (mes) {
+			var mes_value = Number(mes);
+			if (!isNan(mes_value)  && devId !== undefined) {
+				show_measurement(mes_value);
 			} else {
 				console.log('the component is not ready yet');
 			}
